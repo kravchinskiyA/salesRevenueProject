@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ru">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Админ-панель магазина: выручка из двух источников с конвертацией валют." />
+  <title>Выручка магазина — админ-панель</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500&display=swap"
+    rel="stylesheet" />
+</head>
+
+<body>
+  <div class="layout">
+    <header class="header">
+      <div class="header__brand">
+        <span class="header__logo">₿</span>
+        <span class="header__title">Shop<span>Admin</span></span>
+      </div>
+      <div class="header__status">
+        <span class="status-dot"></span>
+        <span id="last-update">Обновлено: 07.10.2026, 19:30</span>
+      </div>
+    </header>
+
+    <main class="main">
+      <section class="page-head">
+        <h1>Выручка магазина</h1>
+        <p class="page-head__subtitle">Текущие транзакции из двух источников, сконвертированные в USD</p>
+      </section>
+
+      <!-- Итоговые карточки -->
+      <section class="stats" aria-label="Итоги">
+        <article class="stat-card">
+          <span class="stat-card__label">Источник 1</span>
+          <span class="stat-card__value" id="first-source-summary">—</span>
+          <span class="stat-card__meta" id="first-source-count">—</span>
+        </article>
+        <article class="stat-card">
+          <span class="stat-card__label">Источник 2</span>
+          <span class="stat-card__value" id="second-source-summary">—</span>
+          <span class="stat-card__meta" id="second-source-count">—</span>
+        </article>
+        <article class="stat-card stat-card--accent">
+          <span class="stat-card__label">Всего заработано</span>
+          <span class="stat-card__value" id="grand-total">—</span>
+          <span class="stat-card__meta">по обоим источникам</span>
+        </article>
+      </section>
+
+      <!-- Таблицы -->
+      <section class="tables">
+        <!-- Источник 1 -->
+        <article class="panel">
+          <header class="panel__head">
+            <h2>Источник 1</h2>
+            <span class="badge">finance1</span>
+          </header>
+          <div class="table-wrap">
+            <table class="table" id="first-source-table">
+              <thead>
+                <tr>
+                  <th>№ транзакции</th>
+                  <th class="num">Сумма</th>
+                  <th>Валюта</th>
+                  <th class="num">Курс к USD</th>
+                  <th class="num">Итого, USD</th>
+                </tr>
+              </thead>
+              <tbody id="first-source-body">
+                <tr>
+                  <td class="mono">—</td>
+                  <td class="num">—</td>
+                  <td>—</td>
+                  <td class="num">—</td>
+                  <td class="num strong">—</td>
+                </tr>
+
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">Итого по источнику</td>
+                  <td class="num" id="first-source-total">—</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </article>
+
+        <!-- Источник 2 -->
+        <article class="panel">
+          <header class="panel__head">
+            <h2>Источник 2</h2>
+            <span class="badge">finance2</span>
+          </header>
+          <div class="table-wrap">
+            <table class="table" id="second-source-table">
+              <thead>
+                <tr>
+                  <th>№ транзакции</th>
+                  <th class="num">Сумма</th>
+                  <th>Валюта</th>
+                  <th class="num">Курс к USD</th>
+                  <th class="num">Итого, USD</th>
+                </tr>
+              </thead>
+              <tbody id="second-source-body">
+                <tr>
+                  <td class="mono">—</td>
+                  <td class="num">—</td>
+                  <td>—</td>
+                  <td class="num">—</td>
+                  <td class="num strong">—</td>
+                </tr>
+
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">Итого по источнику</td>
+                  <td class="num" id="second-source-total">—</td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <span>© 2026 ShopAdmin</span>
+      <span>Курсы валют: currencyfreaks.com</span>
+    </footer>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+
+</html>

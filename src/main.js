@@ -13,10 +13,22 @@ const SECOND_SOURCE_URL = 'https://cpa-server-vtel.onrender.com/api/finance2';
 const layoutForRender = document.querySelector('.layout');
 
 
-const firstData = await fetchData(FIRST_SOURCE_URL);
-const secondData = await fetchData(SECOND_SOURCE_URL);
-const currency = await fetchData(CURRENCY_URL);
+let firstData = null;
+let secondData = null;
+let currency = null;
 
+try {
+  [firstData, secondData, currency] = await Promise.all([
+    fetchData(FIRST_SOURCE_URL),
+    fetchData(SECOND_SOURCE_URL),
+    fetchData(CURRENCY_URL)
+  ]);
+
+} catch (error) {
+  console.error("Ошибка загрузки данных:", error);
+  renderErrorRevenue(layoutForRender, error);
+}
+// currency = { rates: {} };
 // const firstData = { transactions: ["USD", "EUR"] };
 // const secondData = ["EUR", "GBP"];
 // const firstData = { transactions: [] };

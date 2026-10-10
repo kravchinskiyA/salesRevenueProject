@@ -1,4 +1,7 @@
 export function calculateTotalRevenue(sourceTransactions, currency) {
+    if (Object.keys(currency.rates).length === 0) {
+        throw new Error("Currency rates are not available");
+    }
     const currencyUSD = currency.rates;
     let totalRevenueUSD = 0;
 
@@ -32,6 +35,9 @@ export function calculateTotalRevenue(sourceTransactions, currency) {
 }
 
 export function calculateItemRevenue(transaction, currency) {
+    if (Object.keys(currency.rates).length === 0) {
+        throw new Error("Currency rates are not available");
+    }
     let sum = 0;
     const currencyUSD = currency.rates;
 

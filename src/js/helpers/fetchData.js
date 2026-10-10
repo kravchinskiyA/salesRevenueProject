@@ -23,6 +23,6 @@ export async function fetchData(url, options = {}) {
         }
     } catch (error) {
         console.error("Error fetching data:", error);
-
+        throw error;
     }
 }

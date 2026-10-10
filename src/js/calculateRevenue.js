@@ -2,36 +2,14 @@ export function calculateTotalRevenue(sourceTransactions, currency) {
     if (Object.keys(currency.rates).length === 0) {
         throw new Error("Currency rates are not available");
     }
-    const currencyUSD = currency.rates;
-    let totalRevenueUSD = 0;
 
-    if (sourceTransactions.length === 0) {
-        return totalRevenueUSD;
-    }
+    // Складываем округлённые суммы строк в центах — итог совпадает с таблицей
+    const totalCents = sourceTransactions.reduce(
+        (acc, transaction) => acc + Math.round(calculateItemRevenue(transaction, currency) * 100),
+        0
+    );
 
-    if (sourceTransactions.every(item => typeof item === 'object')) {
-
-        for (const transaction of sourceTransactions) {
-            if (transaction.currency.toUpperCase() === 'USD') {
-                totalRevenueUSD += transaction.amount;
-            } else if (currencyUSD[transaction.currency]) {
-                totalRevenueUSD += transaction.amount / currencyUSD[transaction.currency.toUpperCase()];
-            }
-        }
-    }
-    if (sourceTransactions.every(item => typeof item === 'string')) {
-
-        for (const transaction of sourceTransactions) {
-            if (transaction.split(" ")[1].toUpperCase() === 'USD') {
-                totalRevenueUSD += Number(transaction.split(" ")[0]);
-            } else if (currencyUSD[transaction.split(" ")[1].toUpperCase()]) {
-                totalRevenueUSD += Number(transaction.split(" ")[0]) / currencyUSD[transaction.split(" ")[1].toUpperCase()];
-            }
-        }
-    }
-
-    return Number(totalRevenueUSD.toFixed(2));
-
+    return totalCents / 100;
 }
 
 export function calculateItemRevenue(transaction, currency) {
@@ -44,7 +22,7 @@ export function calculateItemRevenue(transaction, currency) {
     if (typeof transaction === 'object') {
         if (transaction.currency.toUpperCase() === 'USD') {
             sum += transaction.amount;
-        } else if (currencyUSD[transaction.currency]) {
+        } else if (currencyUSD[transaction.currency.toUpperCase()]) {
             sum += transaction.amount / currencyUSD[transaction.currency.toUpperCase()];
         }
     }
@@ -57,6 +35,6 @@ export function calculateItemRevenue(transaction, currency) {
         }
     }
 
-    return Number(sum.toFixed(4));
+    return Number(sum.toFixed(2));
 }
 

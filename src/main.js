@@ -45,7 +45,7 @@ try {
   validateSecSource(secondData);
   let totalFirstSource = calculateTotalRevenue(firstData.transactions, currency);
   let totalSecSource = calculateTotalRevenue(secondData, currency);
-  let totalBothSources = totalFirstSource + totalSecSource;
+  let totalBothSources = (Math.round(totalFirstSource * 100) + Math.round(totalSecSource * 100)) / 100;
   renderRevenue(firstData.transactions, secondData, currency, totalFirstSource, totalSecSource, totalBothSources, layoutForRender);
 } catch (error) {
   renderErrorRevenue(layoutForRender, error);
